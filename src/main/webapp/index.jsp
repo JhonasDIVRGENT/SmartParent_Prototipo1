@@ -3,11 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <title>SmartParent - Inicio</title>
 </head>
 <body>
-hola
-
+    <h1>Bienvenido a SmartParent</h1>
+    <a href="home">Ir al menú</a>
 </body>
 </html>
