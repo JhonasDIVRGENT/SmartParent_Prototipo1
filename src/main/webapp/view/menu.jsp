@@ -9,7 +9,7 @@
     <h1>Menú de opciones - SmartParent</h1>
     <ul>
         <li><a href="asistencia">Ver Asistencia</a></li>
-        <li><a href="#">Ver Calificaciones</a></li>
+        <li><a href="calificaciones">Ver Calificaciones</a></li>
         <li><a href="#">Ver Resultados de Examen</a></li>
         <li><a href="#">Ver Probabilidad de Ingreso</a></li>
         <li><a href="#">Cerrar Sesión</a></li>
