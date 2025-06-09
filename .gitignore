@@ -1,0 +1,26 @@
+# Eclipse files
+.settings/
+.project
+.classpath
+
+# Build directories
+bin/
+build/
+
+# Tomcat work directory
+work/
+
+# IDE files
+.idea/
+*.iml
+
+# Output folders
+target/
+
+# Logs
+logs/
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
