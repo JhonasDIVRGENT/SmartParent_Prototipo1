@@ -4,6 +4,7 @@
 <%@ page import="java.util.ArrayList" %>
 <html>
 <head>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
     <title>Asistencia - SmartParent</title>
 </head>
 <body>
