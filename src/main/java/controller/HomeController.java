@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * Servlet implementation class HomeController
  */
-@WebServlet("/HomeController")
+@WebServlet("/home")
 public class HomeController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
