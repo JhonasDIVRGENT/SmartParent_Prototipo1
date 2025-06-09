@@ -25,9 +25,17 @@ public class CalificacionesController extends HttpServlet {
         // Crear lista de calificaciones en memoria
         List<Calificacion> listaCalificaciones = new ArrayList<>();
         
-        listaCalificaciones.add(new Calificacion("Matemáticas", 18.5));
-        listaCalificaciones.add(new Calificacion("Comunicación", 15.0));
-        listaCalificaciones.add(new Calificacion("Historia", 19.2));
+
+        listaCalificaciones.add(new Calificacion("Razonamiento Matemático", 17.5));
+        listaCalificaciones.add(new Calificacion("Razonamiento Verbal", 18.0));
+        listaCalificaciones.add(new Calificacion("Aritmética", 16.8));
+        listaCalificaciones.add(new Calificacion("Álgebra", 19.2));
+        listaCalificaciones.add(new Calificacion("Geometría", 15.5));
+        listaCalificaciones.add(new Calificacion("Trigonometría", 16.0));
+        listaCalificaciones.add(new Calificacion("Física", 17.0));
+        listaCalificaciones.add(new Calificacion("Química", 18.7));
+        listaCalificaciones.add(new Calificacion("Biología", 17.3));
+        listaCalificaciones.add(new Calificacion("Historia del Perú", 16.4));
         
         // Pasar la lista a la JSP
         request.setAttribute("listaCalificaciones", listaCalificaciones);

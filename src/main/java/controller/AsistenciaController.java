@@ -25,9 +25,16 @@ public class AsistenciaController extends HttpServlet {
         // Crear lista de asistencias en memoria
         List<Asistencia> listaAsistencia = new ArrayList<>();
         
-        listaAsistencia.add(new Asistencia("2025-06-01", "Matemáticas", "Presente"));
-        listaAsistencia.add(new Asistencia("2025-06-02", "Comunicación", "Tardanza"));
-        listaAsistencia.add(new Asistencia("2025-06-03", "Historia", "Ausente"));
+        listaAsistencia.add(new Asistencia("2025-06-01", "Razonamiento Matemático", "Presente"));
+        listaAsistencia.add(new Asistencia("2025-06-02", "Razonamiento Verbal", "Tardanza"));
+        listaAsistencia.add(new Asistencia("2025-06-03", "Aritmética", "Presente"));
+        listaAsistencia.add(new Asistencia("2025-06-04", "Álgebra", "Presente"));
+        listaAsistencia.add(new Asistencia("2025-06-05", "Geometría", "Ausente"));
+        listaAsistencia.add(new Asistencia("2025-06-06", "Trigonometría", "Presente"));
+        listaAsistencia.add(new Asistencia("2025-06-07", "Física", "Tardanza"));
+        listaAsistencia.add(new Asistencia("2025-06-08", "Química", "Presente"));
+        listaAsistencia.add(new Asistencia("2025-06-09", "Biología", "Ausente"));
+        listaAsistencia.add(new Asistencia("2025-06-10", "Historia del Perú", "Presente"));
         
         // Pasar la lista a la JSP
         request.setAttribute("listaAsistencia", listaAsistencia);
