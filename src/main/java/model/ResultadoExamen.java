@@ -1,32 +1,49 @@
 package model;
 
+import java.sql.Date;
+
 public class ResultadoExamen {
 
-    private String examen;
-    private String tipoExamen;
+    private String nombreExamen;
+    private String tipo;
+    private Date fechaAplicacion;
     private double notaObtenida;
 
-    public ResultadoExamen(String examen, String tipoExamen, double notaObtenida) {
-        this.examen = examen;
-        this.tipoExamen = tipoExamen;
-        this.notaObtenida = notaObtenida;
+    // Constructor vacío n
+    public ResultadoExamen() {
+    }
+
+    // Constructor completo 
+    public ResultadoExamen(String nombreExamen, String tipo, Date fechaAplicacion, double notaObtenida) {
+        this.nombreExamen   = nombreExamen;
+        this.tipo            = tipo;
+        this.fechaAplicacion = fechaAplicacion;
+        this.notaObtenida    = notaObtenida;
     }
 
     // Getters y Setters
-    public String getExamen() {
-        return examen;
+    public String getNombreExamen() {
+        return nombreExamen;
     }
 
-    public void setExamen(String examen) {
-        this.examen = examen;
+    public void setNombreExamen(String nombreExamen) {
+        this.nombreExamen = nombreExamen;
     }
 
-    public String getTipoExamen() {
-        return tipoExamen;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setTipoExamen(String tipoExamen) {
-        this.tipoExamen = tipoExamen;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public Date getFechaAplicacion() {
+        return fechaAplicacion;
+    }
+
+    public void setFechaAplicacion(Date fechaAplicacion) {
+        this.fechaAplicacion = fechaAplicacion;
     }
 
     public double getNotaObtenida() {
@@ -36,5 +53,4 @@ public class ResultadoExamen {
     public void setNotaObtenida(double notaObtenida) {
         this.notaObtenida = notaObtenida;
     }
-
 }

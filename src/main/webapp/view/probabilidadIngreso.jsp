@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="model.ProbabilidadIngreso" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -13,17 +14,13 @@
             height: 100%;
             margin: 0;
             font-family: 'Poppins', sans-serif;
-            background-image: url("img/fondo2.jpg");
+            background-image: url("<%= request.getContextPath() %>/img/fondo2.jpg");
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             background-repeat: no-repeat;
         }
-
-        .navbar {
-            background-color: rgba(0, 51, 102, 0.3);
-        }
-
+        .navbar { background-color: rgba(0, 51, 102, 0.3); }
         .navbar-brand {
             font-family: 'Roboto Slab', serif;
             font-size: 24px;
@@ -32,31 +29,18 @@
             padding: 5px 12px;
             border-radius: 10px;
         }
-
         .navbar-text {
             font-family: 'Raleway', sans-serif;
             font-size: 24px;
             font-weight: bold;
             color: #ffffff;
         }
-
         .welcome-message {
             margin-top: 30px;
             text-align: center;
             color: #ffffff;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
         }
-
-        .welcome-message h2 {
-            font-size: 36px;
-            font-weight: bold;
-        }
-
-        .welcome-message p {
-            font-size: 18px;
-            margin-top: 10px;
-        }
-
         .content-container {
             padding: 40px;
             min-height: calc(100vh - 200px);
@@ -65,13 +49,15 @@
             align-items: center;
             justify-content: center;
         }
-
         .probabilidad-box {
             background-color: rgba(255, 255, 255, 0.95);
             border-radius: 12px;
             padding: 30px;
             box-shadow: 0 0 10px rgba(0,0,0,0.2);
             text-align: center;
+        }
+        .probabilidad-box p {
+            margin: 0;
             font-size: 24px;
             font-weight: bold;
             color: #0066cc;
@@ -82,7 +68,7 @@
 
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">FLEMING</a>
+        <a class="navbar-brand" href="<%= request.getContextPath() %>/home">FLEMING</a>
         <span class="navbar-text">SmartParent</span>
     </div>
 </nav>
@@ -95,24 +81,26 @@
 <div class="content-container">
     <div class="probabilidad-box">
         <%
-            Double probabilidadIngreso = (Double) request.getAttribute("probabilidadIngreso");
-            if (probabilidadIngreso != null) {
+            ProbabilidadIngreso pi = (ProbabilidadIngreso) request.getAttribute("probabilidadIngreso");
+            if (pi != null) {
         %>
-            Probabilidad estimada de ingreso: <%= probabilidadIngreso %> %
+            <p>Promedio: <%= String.format("%.2f", pi.getPromedio()) %></p>
+            <p>Probabilidad de ingreso: <%= pi.getProbabilidad() %></p>
         <%
             } else {
         %>
-            No se pudo calcular la probabilidad de ingreso.
+            <p>No se pudo calcular la probabilidad de ingreso.</p>
         <%
             }
         %>
     </div>
 
     <div class="mt-4">
-        <a href="home" class="btn btn-primary">Volver al Menú</a>
+        <a href="<%= request.getContextPath() %>/home" class="btn btn-primary">Volver al Menú</a>
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+

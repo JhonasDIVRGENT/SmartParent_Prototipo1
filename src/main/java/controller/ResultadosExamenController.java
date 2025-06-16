@@ -1,15 +1,16 @@
 package controller;
 
+import dao.ResultadoExamenDAO;
+import model.ResultadoExamen;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
-import model.ResultadoExamen;
+import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/resultadosExamen")
 public class ResultadosExamenController extends HttpServlet {
@@ -19,34 +20,29 @@ public class ResultadosExamenController extends HttpServlet {
         super();
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Crear lista de resultados en memoria
-        List<ResultadoExamen> listaResultados = new ArrayList<>();
-        
+        // 1) ID del alumno (por ahora fijo; luego lo obtienes de sesión o parámetro)
+        int idAlumno = 1;
 
-        listaResultados.add(new ResultadoExamen("Examen de Ranking 1", "Ranking", 18.0));
-        listaResultados.add(new ResultadoExamen("Simulacro 1", "Simulacro", 16.5));
-        listaResultados.add(new ResultadoExamen("Examen Diagnóstico", "Diagnóstico", 17.8));
-        listaResultados.add(new ResultadoExamen("Examen de Ranking 2", "Ranking", 17.2));
-        listaResultados.add(new ResultadoExamen("Simulacro 2", "Simulacro", 19.0));
-        listaResultados.add(new ResultadoExamen("Examen de Ranking 3", "Ranking", 16.4));
-        listaResultados.add(new ResultadoExamen("Simulacro 3", "Simulacro", 17.5));
-        listaResultados.add(new ResultadoExamen("Examen Diagnóstico Final", "Diagnóstico", 18.3));
-        listaResultados.add(new ResultadoExamen("Examen de Ranking 4", "Ranking", 17.6));
-        listaResultados.add(new ResultadoExamen("Simulacro Final", "Simulacro", 18.9));
-        
-        // Pasar la lista a la JSP
-        request.setAttribute("listaResultados", listaResultados);
-        
-        // Redirigir a resultadosExamen.jsp
-        request.getRequestDispatcher("/view/resultadosExamen.jsp").forward(request, response);
+        // 2) Obtén la lista desde el DAO
+        ResultadoExamenDAO dao = new ResultadoExamenDAO();
+        List<ResultadoExamen> listaResultados = dao.obtenerResultadosPorAlumno(idAlumno);
+
+        // 3) Pasa la lista al JSP
+        request.setAttribute("listaResultadosExamen", listaResultados);
+
+        // 4) Redirige al JSP correspondiente
+        request.getRequestDispatcher("/view/resultadosExamen.jsp")
+               .forward(request, response);
     }
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doGet(request, response);
     }
-
 }
+

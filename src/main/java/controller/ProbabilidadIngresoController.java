@@ -1,10 +1,14 @@
 package controller;
 
+import dao.ProbabilidadIngresoDAO;
+import model.ProbabilidadIngreso;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 
 @WebServlet("/probabilidadIngreso")
@@ -15,32 +19,27 @@ public class ProbabilidadIngresoController extends HttpServlet {
         super();
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // 1) ID del alumno (por ahora fijo; luego de sesión o parámetro)
+        int idAlumno = 1;
 
-        // Simulación de valores en memoria
-        double porcentajeAsistencia = 90.0; // % de asistencia
-        double promedioCalificaciones = 85.0; // Promedio de calificaciones (sobre 100)
-        double promedioResultadosExamen = 80.0; // Promedio resultados exámenes (sobre 100)
+        // 2) Llamada al DAO
+        ProbabilidadIngresoDAO dao = new ProbabilidadIngresoDAO();
+        ProbabilidadIngreso pi = dao.obtenerProbabilidad(idAlumno);
 
-        // Fórmula simple
-        double probabilidadIngreso = (porcentajeAsistencia * 0.4)
-                                    + (promedioCalificaciones * 0.4)
-                                    + (promedioResultadosExamen * 0.2);
+        // 3) Paso el resultado al JSP
+        request.setAttribute("probabilidadIngreso", pi);
 
-        // Redondear a 2 decimales
-        probabilidadIngreso = Math.round(probabilidadIngreso * 100.0) / 100.0;
-
-        // Pasar el resultado a la JSP
-        request.setAttribute("probabilidadIngreso", probabilidadIngreso);
-
-        // Redirigir a probabilidadIngreso.jsp
-        request.getRequestDispatcher("/view/probabilidadIngreso.jsp").forward(request, response);
+        // 4) Redirijo al JSP
+        request.getRequestDispatcher("/view/probabilidadIngreso.jsp")
+               .forward(request, response);
     }
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doGet(request, response);
     }
-
 }
