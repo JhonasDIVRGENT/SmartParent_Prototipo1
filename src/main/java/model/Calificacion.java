@@ -9,7 +9,9 @@ public class Calificacion {
         this.curso = curso;
         this.notaFinal = notaFinal;
     }
-
+    
+    public Calificacion() {
+    }
     // Getters y Setters
     public String getCurso() {
         return curso;
