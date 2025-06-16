@@ -1,23 +1,23 @@
 package model;
 
+import java.sql.Date;
+
 public class Asistencia {
 
-    private String fecha;
+    private Date fecha;
     private String curso;
     private String estado;
 
-    public Asistencia(String fecha, String curso, String estado) {
-        this.fecha = fecha;
-        this.curso = curso;
-        this.estado = estado;
+    // Constructor vacío
+    public Asistencia() {
     }
 
-    // Getters y Setters
-    public String getFecha() {
+    // Getters y Setters correctos para Date
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(String fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
@@ -36,5 +36,4 @@ public class Asistencia {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-
 }
