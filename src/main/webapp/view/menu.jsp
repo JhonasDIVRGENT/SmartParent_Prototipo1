@@ -1,120 +1,228 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" session="true" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Dashboard - SmartParent</title>
+  <meta charset="UTF-8">
+  <title>Dashboard - SmartParent</title>
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome para iconos -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Poppins:wght@300;500;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+  <style>
+    /* Fondo original */
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-image: url("img/fondo2.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
 
-    <style>
-        body, html {
-            height: 100%;
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-            background-image: url("img/fondo2.jpg");
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-        }
+    .navbar {
+      background-color: rgba(0, 51, 102, 0.3);
+    }
+    .navbar-brand {
+      font-family: 'Roboto Slab', serif;
+      font-size: 24px;
+      color: #fff;
+      border: 2px solid white;
+      padding: 5px 12px;
+      border-radius: 10px;
+    }
+    .navbar-text {
+      font-family: 'Raleway', sans-serif;
+      font-size: 24px;
+      font-weight: bold;
+      color: #ffffff;
+    }
 
-        .navbar {
-            background-color: rgba(0, 51, 102, 0.3);
-        }
+    /* Saludo */
+    .welcome-parent {
+      text-align: center;
+      margin: 20px 0 10px;
+      color: #fff;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+    }
+    .welcome-parent h2 {
+      font-size: 2rem;
+      font-weight: bold;
+    }
 
-        .navbar-brand {
-            font-family: 'Roboto Slab', serif;
-            font-size: 24px;
-            color: #fff;
-            border: 2px solid white;
-            padding: 5px 12px;
-            border-radius: 10px;
-        }
+    /* Datos del alumno */
+    .student-card {
+      background-color: rgba(255,255,255,0.9);
+      border-radius: .75rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,.15);
+      margin: 20px auto 40px;
+      max-width: 600px;
+      padding: 20px;
+      color: #333;
+    }
+    .student-card h3 {
+      margin-bottom: 1rem;
+      font-weight: bold;
+      color: #005f99;
+    }
+    .student-card .list-group-item {
+      background: transparent;
+      border: none;
+      padding-left: 0;
+    }
 
-        .navbar-text {
-            font-family: 'Raleway', sans-serif;
-            font-size: 24px;
-            font-weight: bold;
-            color: #ffffff;
-        }
-
-        .welcome-message {
-            margin-top: 30px;
-            text-align: center;
-            color: #ffffff;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-        }
-
-        .welcome-message h2 {
-            font-size: 36px;
-            font-weight: bold;
-        }
-
-        .welcome-message p {
-            font-size: 18px;
-            margin-top: 10px;
-        }
-
-        .dashboard-container {
-            padding: 40px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            min-height: calc(100vh - 200px); /* ajustamos porque ahora hay mensaje arriba */
-            gap: 20px;
-        }
-
-        .dashboard-card {
-            background-color: rgba(255, 255, 255, 0.9);
-            width: 250px;
-            height: 150px;
-            border-radius: 12px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.2);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            font-size: 18px;
-            font-weight: bold;
-            transition: transform 0.2s, box-shadow 0.2s;
-            text-decoration: none;
-            color: #0066cc;
-        }
-
-        .dashboard-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            background-color: rgba(0, 102, 204, 0.1);
-            color: #004080;
-        }
-    </style>
+    /* Nuevo diseño de tarjetas */
+    .dashboard-card {
+      transition: transform .3s, box-shadow .3s;
+      border: none;
+      border-radius: .75rem;
+      background-color: rgba(255,255,255,0.9);
+    }
+    .dashboard-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(0,0,0,.15);
+    }
+    .dashboard-card .card-body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+    .dashboard-card .card-body i {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #0077cc;
+    }
+    .dashboard-card .card-body h5 {
+      font-size: 1.1rem;
+      margin-bottom: 0;
+      color: #333;
+    }
+  </style>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg">
+  <!-- Navbar original -->
+  <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">FLEMING</a>
-        <span class="navbar-text">SmartParent</span>
+      <a class="navbar-brand" href="#">FLEMING</a>
+      <span class="navbar-text">SmartParent</span>
     </div>
-</nav>
+  </nav>
 
-<div class="container welcome-message">
-    <h2>Bienvenido padre de familia</h2>
-    <p>Aquí podrás dar seguimiento a tu hijo</p>
-</div>
+  <!-- Saludo al padre -->
+  <div class="welcome-parent">
+    <h2>Bienvenido, <%= session.getAttribute("parentName") %>!</h2>
+  </div>
 
-<div class="dashboard-container">
-    <a href="asistencia" class="dashboard-card">Ver Asistencia</a>
-    <a href="calificaciones" class="dashboard-card">Ver Calificaciones</a>
-    <a href="resultadosExamen" class="dashboard-card">Ver Resultados de Examen</a>
-    <a href="probabilidadIngreso" class="dashboard-card">Ver Probabilidad de Ingreso</a>
-    <a href="cerrarSesion" class="dashboard-card">Cerrar Sesión</a>
-</div>
+  <!-- Datos del alumno (si existen) -->
+  <%
+    model.Student alumno = (model.Student) request.getAttribute("alumno");
+    if (alumno != null) {
+  %>
+    <div class="student-card">
+      <h3>Datos del Alumno</h3>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><strong>ID:</strong> <%= alumno.getId() %></li>
+        <li class="list-group-item"><strong>DNI:</strong> <%= alumno.getDni() %></li>
+        <li class="list-group-item"><strong>Nombre:</strong> <%= alumno.getNombreCompleto() %></li>
+        <li class="list-group-item"><strong>Fecha Nac.:</strong> <%= alumno.getFechaNacimiento() %></li>
+        <li class="list-group-item"><strong>Fecha Registro:</strong> <%= alumno.getFechaRegistro() %></li>
+      </ul>
+    </div>
+  <%
+    } else {
+  %>
+    <div class="alert alert-warning text-center mt-4">
+      No se encontraron datos del alumno.
+    </div>
+  <%
+    }
+  %>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Nuevo diseño de tarjetas -->
+  <div class="container my-5">
+    <div class="row g-4 justify-content-center">
+      <!-- Ver Asistencia -->
+      <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+        <a href="asistencia" class="text-decoration-none">
+          <div class="card dashboard-card h-100">
+            <div class="card-body">
+              <i class="fa-solid fa-calendar-check"></i>
+              <h5 class="card-title">Ver Asistencia</h5>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Ver Calificaciones -->
+      <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+        <a href="calificaciones" class="text-decoration-none">
+          <div class="card dashboard-card h-100">
+            <div class="card-body">
+              <i class="fa-solid fa-graduation-cap"></i>
+              <h5 class="card-title">Ver Calificaciones</h5>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Resultados Examen -->
+      <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+        <a href="resultadosExamen" class="text-decoration-none">
+          <div class="card dashboard-card h-100">
+            <div class="card-body">
+              <i class="fa-solid fa-file-lines"></i>
+              <h5 class="card-title">Resultados Examen</h5>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Probabilidad Ingreso -->
+      <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+        <a href="probabilidadIngreso" class="text-decoration-none">
+          <div class="card dashboard-card h-100">
+            <div class="card-body">
+              <i class="fa-solid fa-chart-line"></i>
+              <h5 class="card-title">Probabilidad Ingreso</h5>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Cerrar Sesión -->
+      <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+        <a href="cerrarSesion" class="text-decoration-none">
+          <div class="card dashboard-card h-100">
+            <div class="card-body">
+              <i class="fa-solid fa-right-from-bracket"></i>
+              <h5 class="card-title">Cerrar Sesión</h5>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Descargar Resumen -->
+     <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+  		<a href="testDownload.jsp" class="text-decoration-none" target="_blank">
+  		 	 <div class="card dashboard-card h-100">
+    	  		<div class="card-body">
+        			<i class="fa-solid fa-file-pdf"></i>
+        			<h5 class="card-title">Descargar Resumen</h5>
+     		 	</div>
+    		</div>
+ 		 </a>
+	</div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+

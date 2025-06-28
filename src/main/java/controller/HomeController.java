@@ -1,33 +1,44 @@
 package controller;
 
+import dao.StudentDAO;
+import model.Student;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.*;
 import java.io.IOException;
 
-/**
- * Servlet implementation class HomeController
- */
 @WebServlet("/home")
 public class HomeController extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    private StudentDAO studentDAO = new StudentDAO();
 
-    public HomeController() {
-        super();
-    }
-
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // Recuperamos studentId de la sesión
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("studentId") == null) {
+            response.sendRedirect("index.jsp");
+            return;
+        }
 
-        // Redirigir a menu.jsp
-        request.getRequestDispatcher("/view/menu.jsp").forward(request, response);
+        int studentId = (int) session.getAttribute("studentId");
+
+        try {
+            Student alumno = studentDAO.getStudentById(studentId);
+            request.setAttribute("alumno", alumno);
+            // forward a menu.jsp
+            request.getRequestDispatcher("/view/menu.jsp")
+                   .forward(request, response);
+        } catch (Exception e) {
+            throw new ServletException("Error recuperando datos del alumno", e);
+        }
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        doGet(request, response);
+        doGet(req, resp);
     }
-
 }
